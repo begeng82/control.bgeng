@@ -3,195 +3,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enterprise Core System</title>
+<title>Enterprise Carbon Dashboard</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 body{
-font-family:'Segoe UI',sans-serif;
+font-family:'Plus Jakarta Sans',sans-serif;
 background:#121212;
+min-height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-min-height:100vh;
-color:white;
+overflow-x:hidden;
+margin:0;
 }
 
-.card{
+.glass-card{
 background:#1a2236;
 border:1px solid rgba(255,255,255,0.05);
-transition:0.3s;
+transition:all .4s;
 }
 
-.card:hover{
-transform:translateY(-6px);
-border-color:#3b82f6;
+.glass-card:hover{
+background:#1e2945;
+transform:translateY(-8px);
+border-color:rgba(99,102,241,.3);
+box-shadow:0 25px 50px -12px rgba(0,0,0,.7);
 }
 
-.popup{
-position:fixed;
-top:50%;
-left:50%;
+.notification-center{
+transition:.5s;
 transform:translate(-50%,-50%) scale(.8);
 opacity:0;
 pointer-events:none;
-transition:.4s;
 }
 
-.popup.active{
+.notification-center.active{
+transform:translate(-50%,-50%) scale(1);
 opacity:1;
 pointer-events:auto;
-transform:translate(-50%,-50%) scale(1);
 }
 
+.icon-box{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.ambient-glow{
+position:absolute;
+width:600px;
+height:600px;
+background:rgba(30,58,138,.15);
+filter:blur(140px);
+border-radius:50%;
+z-index:-1;
+}
 </style>
 </head>
 
 <body class="p-6">
 
-<div class="max-w-5xl w-full">
+<div class="ambient-glow" style="top:-200px;left:-200px;"></div>
+<div class="ambient-glow" style="bottom:-200px;right:-200px;"></div>
 
-<div class="text-center mb-14">
-<h1 class="text-4xl font-bold">Core <span class="text-blue-500">System</span></h1>
-<p class="text-gray-400 mt-2">Operational Control Center</p>
+<div class="w-full max-w-5xl mx-auto">
+
+<div class="text-center mb-16">
+<h1 class="text-3xl md:text-5xl font-bold text-white">
+Core <span class="text-blue-500">System</span>
+</h1>
+<p class="text-slate-500 mt-2 uppercase tracking-widest">Pusat Kendali Operasional</p>
 </div>
 
-<div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-2 lg:grid-cols-3 gap-5 md:gap-10">
 
-<button onclick="handleAction('Analytics','https://google.com')" class="card p-10 rounded-3xl text-center">
-<i class="fas fa-chart-line text-3xl text-blue-400 mb-4"></i>
-<h3 class="font-bold">Analytics</h3>
+<button onclick="handleAction('Utama','https://google.com')" class="glass-card group p-10 rounded-[2.5rem] text-center">
+<i class="fas fa-chart-line text-2xl text-blue-400 mb-4"></i>
+<h3 class="text-white font-bold">Analytics</h3>
 </button>
 
-<button onclick="handleAction('Revenue','#restricted')" class="card p-10 rounded-3xl text-center">
-<i class="fas fa-file-invoice-dollar text-3xl text-blue-400 mb-4"></i>
-<h3 class="font-bold">Revenue</h3>
+<button onclick="handleAction('Finance','#restricted')" class="glass-card group p-10 rounded-[2.5rem] text-center">
+<i class="fas fa-file-invoice-dollar text-2xl text-blue-400 mb-4"></i>
+<h3 class="text-white font-bold">Revenue</h3>
 </button>
 
-<button onclick="handleAction('Projects','https://notion.so')" class="card p-10 rounded-3xl text-center">
-<i class="fas fa-sitemap text-3xl text-blue-400 mb-4"></i>
-<h3 class="font-bold">Projects</h3>
+<button onclick="handleAction('Project','https://notion.so')" class="glass-card group p-10 rounded-[2.5rem] text-center">
+<i class="fas fa-sitemap text-2xl text-blue-400 mb-4"></i>
+<h3 class="text-white font-bold">Projects</h3>
 </button>
 
-<button onclick="handleAction('Inbox','#maintenance')" class="card p-10 rounded-3xl text-center">
-<i class="fas fa-envelope-open-text text-3xl text-blue-400 mb-4"></i>
-<h3 class="font-bold">Inbox</h3>
+<button onclick="handleAction('Message','#maintenance')" class="glass-card group p-10 rounded-[2.5rem] text-center">
+<i class="fas fa-envelope-open-text text-2xl text-blue-400 mb-4"></i>
+<h3 class="text-white font-bold">Inbox</h3>
 </button>
 
-<button onclick="handleAction('Archives','#restricted')" class="card p-10 rounded-3xl text-center">
-<i class="fas fa-database text-3xl text-blue-400 mb-4"></i>
-<h3 class="font-bold">Archives</h3>
+<button onclick="handleAction('Storage','#restricted')" class="glass-card group p-10 rounded-[2.5rem] text-center">
+<i class="fas fa-database text-2xl text-blue-400 mb-4"></i>
+<h3 class="text-white font-bold">Archives</h3>
 </button>
 
-<button onclick="handleAction('Security','#maintenance')" class="card p-10 rounded-3xl text-center">
-<i class="fas fa-user-shield text-3xl text-blue-400 mb-4"></i>
-<h3 class="font-bold">Security</h3>
+<button onclick="handleAction('Admin','#maintenance')" class="glass-card group p-10 rounded-[2.5rem] text-center">
+<i class="fas fa-user-shield text-2xl text-blue-400 mb-4"></i>
+<h3 class="text-white font-bold">Security</h3>
 </button>
 
 </div>
 
 </div>
+
 
 <!-- POPUP -->
+<div id="centralNotify" class="fixed top-1/2 left-1/2 notification-center z-[100] w-[90%] max-w-sm">
+<div class="bg-[#1a2236] border border-white/10 p-10 rounded-[3rem] text-center">
 
-<div id="popup" class="popup bg-[#1a2236] border border-white/10 p-10 rounded-3xl w-[90%] max-w-sm text-center">
+<div id="notifyIconContainer" class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 border">
+<i id="notifyIcon" class="fas fa-lock text-3xl"></i>
+</div>
 
-<div id="popupIcon" class="text-4xl mb-4"></div>
+<h2 id="notifyTitle" class="text-2xl font-bold text-white mb-3"></h2>
 
-<h2 id="popupTitle" class="text-xl font-bold mb-3"></h2>
+<p id="notifyText" class="text-slate-400 text-sm mb-6"></p>
 
-<p id="popupText" class="text-gray-400 mb-6"></p>
+<div id="extraArea"></div>
 
-<div id="popupInput"></div>
-
-<button id="closeBtn" onclick="closePopup()" class="hidden w-full mt-4 py-3 bg-gray-700 rounded-xl">
-Close
+<button id="closeBtn" onclick="closeNotify()" class="hidden w-full py-3 bg-white/10 rounded-xl">
+Kembali
 </button>
 
+</div>
 </div>
 
 
 <script>
 
-const keys=[
+const accessKeys=[
 "CORE-2026",
-"ADMIN-ROOT",
-"FINANCE-ACCESS",
-"ARCHIVE-KEY",
-"SECURE-MASTER"
+"FINANCE-ROOT",
+"ARCHIVE-ACCESS",
+"MASTER-KEY",
+"SECURE-ADMIN"
 ]
 
-let tries=0
-let maxTry=5
-let redirectURL="https://example.com"
+let attempt=0
+let maxAttempt=5
+let targetLink="https://example.com"
 
 function handleAction(name,url){
 
-const popup=document.getElementById("popup")
-const icon=document.getElementById("popupIcon")
-const title=document.getElementById("popupTitle")
-const text=document.getElementById("popupText")
-const input=document.getElementById("popupInput")
-const close=document.getElementById("closeBtn")
+const notify=document.getElementById('centralNotify')
+const title=document.getElementById('notifyTitle')
+const text=document.getElementById('notifyText')
+const icon=document.getElementById('notifyIcon')
+const extra=document.getElementById('extraArea')
+const close=document.getElementById('closeBtn')
 
-popup.classList.add("active")
+notify.classList.add('active')
+extra.innerHTML=""
 close.classList.add("hidden")
-input.innerHTML=""
 
-if(url=="#restricted"){
+if(url=="#maintenance"){
 
-icon.innerHTML='<i class="fas fa-lock text-blue-400"></i>'
+icon.className="fas fa-tools text-amber-500 text-3xl"
+title.innerText="Sedang Maintenance"
+text.innerText="Modul "+name+" sedang dalam pemeliharaan."
+close.classList.remove("hidden")
+
+}
+
+else if(url=="#restricted"){
+
+icon.className="fas fa-lock text-blue-400 text-3xl"
 title.innerText="Security Authentication"
 text.innerText="Masukkan Access Key untuk membuka modul "+name
 
-input.innerHTML=`
-<input id="keyInput"
-class="w-full p-3 bg-black border border-white/10 rounded-lg text-center"
+extra.innerHTML=`
+
+<input id="accessInput"
+class="w-full p-3 bg-[#121212] border border-white/10 rounded-xl text-center text-white"
 placeholder="Access Key">
 
-<button onclick="verifyKey()"
-class="w-full mt-4 py-3 bg-blue-500 rounded-lg font-bold">
+<button onclick="verifyAccess()"
+class="mt-4 w-full py-3 bg-blue-500 hover:bg-blue-600 rounded-xl font-bold">
 Verify Access
 </button>
 `
 
-}
-
-else if(url=="#maintenance"){
-
-icon.innerHTML='<i class="fas fa-tools text-yellow-500"></i>'
-title.innerText="Maintenance"
-text.innerText="Module "+name+" sedang maintenance"
 close.classList.remove("hidden")
 
 }
 
 else{
 
-window.location.href=url
-
-}
-
-}
-
-
-function verifyKey(){
-
-const val=document.getElementById("keyInput").value
-
-const text=document.getElementById("popupText")
-
-if(keys.includes(val)){
-
-document.getElementById("popupTitle").innerText="Access Granted"
-text.innerText="Kunci valid, menghubungkan ke sistem..."
+icon.className="fas fa-check-circle text-emerald-500 text-3xl"
+title.innerText="Mengakses "+name
+text.innerText="Koneksi diverifikasi..."
 
 setTimeout(()=>{
 
-window.location.href=redirectURL
+window.location.href=url
+
+},1500)
+
+}
+
+}
+
+
+function verifyAccess(){
+
+const val=document.getElementById("accessInput").value
+const text=document.getElementById("notifyText")
+
+if(accessKeys.includes(val)){
+
+document.getElementById("notifyTitle").innerText="Access Granted"
+text.innerText="Kunci valid. Menghubungkan ke sistem..."
+
+setTimeout(()=>{
+
+window.location.href=targetLink
 
 },1500)
 
@@ -199,23 +233,22 @@ window.location.href=redirectURL
 
 else{
 
-tries++
+attempt++
+text.innerText="Access Key salah ("+attempt+"/"+maxAttempt+")"
 
-text.innerText="Access Key salah ("+tries+"/"+maxTry+")"
+if(attempt>=maxAttempt){
 
-if(tries>=maxTry){
-
-text.innerText="Terlalu banyak percobaan. Akses dikunci."
-document.getElementById("popupInput").innerHTML=""
+text.innerText="Terlalu banyak percobaan. Akses diblokir."
+document.getElementById("extraArea").innerHTML=""
 }
 
 }
 
 }
 
-function closePopup(){
+function closeNotify(){
 
-document.getElementById("popup").classList.remove("active")
+document.getElementById('centralNotify').classList.remove('active')
 
 }
 
